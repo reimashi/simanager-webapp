@@ -1,22 +1,14 @@
 package weathercool.proyectosi.webapp;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 
-import weathercool.proyectosi.Department;
-import weathercool.proyectosi.Employee;
-import weathercool.proyectosi.TransactionUtils;
-import weathercool.proyectosi.webapp.util.DesktopEntityManagerManager;
-
-public class DepartmentsVM {
-
+public class UsersVM {
+    private int mierda;
+/*
 	// department under edition...
 	private Department currentDepartment = null;
 	
@@ -70,5 +62,5 @@ public class DepartmentsVM {
 	@NotifyChange("currentDepartment")
 	public void edit(@BindingParam("d") Department department) {
 		this.currentDepartment = department;
-	}
+	}*/
 }
