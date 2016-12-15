@@ -1,0 +1,46 @@
+<zk>
+	<include src="menu.zul"/>
+	<window title="Edit Locations" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('LocationVM')"
+	>
+	
+		<window title="Location Editor" border="normal" mode="modal" visible="@load(vm.currentLocation ne null)">
+			Longitude: <textbox value="@load(vm.currentLocation.longitude) @save(vm.currentLocation.longitude, before='save')" />
+			
+			Latitude: <textbox value="@load(vm.currentLocation.latitude) @save(vm.currentLocation.latitude, before='save')" />
+		<hbox>
+				
+				<button label="save" onClick="@command('save')"/>
+				<button label="cancel" onClick="@command('cancel')"/>
+			</hbox>
+		</window>
+		
+		
+		<groupbox mold="3d" closable="false">
+			
+			<caption label="Location list">
+				<button label="new" onClick="@command('newLocation')"/>
+			</caption>
+			
+			<listbox model="@load(vm.locations)">
+				<listhead>
+					<listheader label="id"/>
+					<listheader label="actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.id)"></label></listcell>
+						<listcell>
+							<button label="delete" onClick="@command('delete', l=each)"/>
+							<button label="edit" onClick="@command('edit', l=each)"/>
+						
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+		
+		</groupbox>		
+	</window>
+</zk>

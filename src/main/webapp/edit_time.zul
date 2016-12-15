@@ -1,0 +1,54 @@
+<zk>
+	<include src="menu.zul"/>
+	<window title="Edit Times" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('TimeVM')"
+	>
+	
+		<window title="Time Editor" border="normal" mode="modal" visible="@load(vm.currentTime ne null)">
+			Year: <textbox value="@load(vm.currentTime.year) @save(vm.currentTime.year, before='save')" />
+			
+			Month: <textbox value="@load(vm.currentTime.month) @save(vm.currentTime.month, before='save')" />
+		
+			Day: <textbox value="@load(vm.currentTime.day) @save(vm.currentTime.day, before='save')" />
+
+			Hour: <textbox value="@load(vm.currentTime.hour) @save(vm.currentTime.hour, before='save')" />
+
+			Minute: <textbox value="@load(vm.currentTime.minute) @save(vm.currentTime.minute, before='save')" />
+
+			Second: <textbox value="@load(vm.currentTime.second) @save(vm.currentTime.second, before='save')" />
+		<hbox>
+				
+				<button label="save" onClick="@command('save')"/>
+				<button label="cancel" onClick="@command('cancel')"/>
+			</hbox>
+		</window>
+		
+		
+		<groupbox mold="3d" closable="false">
+			
+			<caption label="Time list">
+				<button label="new" onClick="@command('newTime')"/>
+			</caption>
+			
+			<listbox model="@load(vm.times)">
+				<listhead>
+					<listheader label="id"/>
+					<listheader label="actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.id)"></label></listcell>
+						<listcell>
+							<button label="delete" onClick="@command('delete', t=each)"/>
+							<button label="edit" onClick="@command('edit', t=each)"/>
+						
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+		
+		</groupbox>		
+	</window>
+</zk>
