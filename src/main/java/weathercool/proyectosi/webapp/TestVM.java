@@ -1,13 +1,12 @@
-package sing.proyectosi.webapp;
+package weathercool.proyectosi.webapp;
 
-import static sing.proyectosi.webapp.util.DesktopEntityManagerManager.getDesktopEntityManager;
+import static weathercool.proyectosi.webapp.util.DesktopEntityManagerManager.getDesktopEntityManager;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 
-import sing.proyectosi.Employee;
-import sing.proyectosi.TransactionUtils;
-import sing.proyectosi.webapp.util.DesktopEntityManagerManager;
+import weathercool.proyectosi.Employee;
+import weathercool.proyectosi.TransactionUtils;
 
 public class TestVM {
 

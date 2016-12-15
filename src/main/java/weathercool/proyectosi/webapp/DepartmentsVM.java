@@ -1,4 +1,4 @@
-package sing.proyectosi.webapp;
+package weathercool.proyectosi.webapp;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 
-import sing.proyectosi.Department;
-import sing.proyectosi.Employee;
-import sing.proyectosi.TransactionUtils;
-import sing.proyectosi.webapp.util.DesktopEntityManagerManager;
+import weathercool.proyectosi.Department;
+import weathercool.proyectosi.Employee;
+import weathercool.proyectosi.TransactionUtils;
+import weathercool.proyectosi.webapp.util.DesktopEntityManagerManager;
 
 public class DepartmentsVM {
 

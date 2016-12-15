@@ -1,4 +1,4 @@
-package sing.proyectosi.webapp.util;
+package weathercool.proyectosi.webapp.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

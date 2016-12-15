@@ -2,7 +2,7 @@
 	<include src="menu.zul"/>
 	<window title="Edit Projects" border="normal"
 		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('sing.proyectosi.webapp.ProjectsVM')"
+		viewModel="@id('vm') @init('ProjectsVM')"
 	>
 	
 		<window title="Project Editor" border="normal" mode="modal" visible="@load(vm.currentProject ne null)">
