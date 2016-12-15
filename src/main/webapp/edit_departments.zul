@@ -1,0 +1,46 @@
+<zk>
+	<include src="menu.zul"/>
+	<window title="Edit Departments" border="normal"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('sing.proyectosi.webapp.DepartmentsVM')"
+	>
+	
+		<window title="Department Editor" border="normal" mode="modal" visible="@load(vm.currentDepartment ne null)">
+			Name: <textbox value="@load(vm.currentDepartment.name) @save(vm.currentDepartment.name, before='save')" />
+			
+			<hbox>
+				
+				<button label="save" onClick="@command('save')"/>
+				<button label="cancel" onClick="@command('cancel')"/>
+			</hbox>
+		
+		</window>
+		
+		
+		<groupbox mold="3d" closable="false">
+			
+			<caption label="Department list">
+				<button label="new" onClick="@command('newDepartment')"/>
+			</caption>
+			
+			<listbox model="@load(vm.departments)">
+				<listhead>
+					<listheader label="name"/>
+					<listheader label="actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.name)"></label></listcell>
+						<listcell>
+							<button label="delete" onClick="@command('delete', d=each)"/>
+							<button label="edit" onClick="@command('edit', d=each)"/>
+						
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+		
+		</groupbox>		
+	</window>
+</zk>

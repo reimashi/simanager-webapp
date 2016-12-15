@@ -1,0 +1,25 @@
+<zk>
+	<menubar>
+		<menu label="Departments">
+			<menupopup>
+				<menuitem label="Edit Departments..." 
+				href="edit_departments.zul">
+				</menuitem>
+			</menupopup>
+		</menu>
+		<menu label="Employees">
+			<menupopup>
+				<menuitem label="Edit Employees..." 
+				href="edit_employees.zul">
+				</menuitem>
+			</menupopup>
+		</menu>
+		<menu label="Projects">
+			<menupopup>
+				<menuitem label="Edit Projects..." 
+				href="edit_projects.zul">
+				</menuitem>
+			</menupopup>
+		</menu>
+	</menubar>
+</zk>
