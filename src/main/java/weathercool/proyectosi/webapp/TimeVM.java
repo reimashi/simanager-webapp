@@ -22,7 +22,7 @@ public class TimeVM {
 	
 	public List<Time> getTimes() {
 		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
-		return em.createQuery("SELECT t FROM time t", Time.class).getResultList();
+		return em.createQuery("SELECT t FROM Time t", Time.class).getResultList();
 	}
 	
 	@Command
@@ -58,7 +58,7 @@ public class TimeVM {
 	
 	@Command
 	@NotifyChange("currentTime")
-	public void edit(@BindingParam("l") Time time) {
+	public void edit(@BindingParam("t") Time time) {
 		this.currentTime = time;
 	}
 }

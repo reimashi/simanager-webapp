@@ -1,47 +1,62 @@
 <zk>
 	<include src="menu.zul"/>
-	<window title="Edit Times" border="normal"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('TimeVM')"
+	<window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.TimeVM')"
 	>
 	
 		<window title="Time Editor" border="normal" mode="modal" visible="@load(vm.currentTime ne null)">
-			Year: <textbox value="@load(vm.currentTime.year) @save(vm.currentTime.year, before='save')" />
+			Año: <textbox value="@load(vm.currentTime.year) @save(vm.currentTime.year, before='save')" />
 			
-			Month: <textbox value="@load(vm.currentTime.month) @save(vm.currentTime.month, before='save')" />
+			Mes: <textbox value="@load(vm.currentTime.month) @save(vm.currentTime.month, before='save')" />
 		
-			Day: <textbox value="@load(vm.currentTime.day) @save(vm.currentTime.day, before='save')" />
+			Día: <textbox value="@load(vm.currentTime.day) @save(vm.currentTime.day, before='save')" />
 
-			Hour: <textbox value="@load(vm.currentTime.hour) @save(vm.currentTime.hour, before='save')" />
+			Hora: <textbox value="@load(vm.currentTime.hour) @save(vm.currentTime.hour, before='save')" />
 
-			Minute: <textbox value="@load(vm.currentTime.minute) @save(vm.currentTime.minute, before='save')" />
+			Minuto: <textbox value="@load(vm.currentTime.minute) @save(vm.currentTime.minute, before='save')" />
 
-			Second: <textbox value="@load(vm.currentTime.second) @save(vm.currentTime.second, before='save')" />
+			Segundo: <textbox value="@load(vm.currentTime.second) @save(vm.currentTime.second, before='save')" />
 		<hbox>
 				
 				<button label="save" onClick="@command('save')"/>
 				<button label="cancel" onClick="@command('cancel')"/>
 			</hbox>
 		</window>
-		
-		
-		<groupbox mold="3d" closable="false">
-			
-			<caption label="Time list">
-				<button label="new" onClick="@command('newTime')"/>
+
+		<groupbox closable="false">
+
+			<caption label="Administrar tiempos">
 			</caption>
-			
+
+			<button label="Nuevo tiempo" onClick="@command('newTime')"/>
+
+        </groupbox>
+		
+		<groupbox closable="false">
+<caption label="Lista de tiempos">
+            </caption>
 			<listbox model="@load(vm.times)">
 				<listhead>
-					<listheader label="id"/>
-					<listheader label="actions"/>
+					<listheader label="ID"/>
+					<listheader label="Año"/>
+					<listheader label="Mes"/>
+					<listheader label="Día"/>
+					<listheader label="Hora"/>
+					<listheader label="Minuto"/>
+					<listheader label="Segundo"/>
+					<listheader label="Acciones"/>
 				</listhead>
 				<template name="model">
 					<listitem>
 						<listcell><label value="@load(each.id)"></label></listcell>
+						<listcell><label value="@load(each.year)"></label></listcell>
+						<listcell><label value="@load(each.month)"></label></listcell>
+						<listcell><label value="@load(each.day)"></label></listcell>
+						<listcell><label value="@load(each.hour)"></label></listcell>
+						<listcell><label value="@load(each.minute)"></label></listcell>
+						<listcell><label value="@load(each.second)"></label></listcell>
 						<listcell>
-							<button label="delete" onClick="@command('delete', t=each)"/>
-							<button label="edit" onClick="@command('edit', t=each)"/>
+							<button label="Borrar" onClick="@command('delete', t=each)"/>
+							<button label="Editar" onClick="@command('edit', t=each)"/>
 						
 						</listcell>					
 					</listitem>

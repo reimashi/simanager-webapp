@@ -22,7 +22,7 @@ public class LocationVM {
 	
 	public List<Location> getLocations() {
 		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
-		return em.createQuery("SELECT l FROM location l", Location.class).getResultList();
+		return em.createQuery("SELECT l FROM Location l", Location.class).getResultList();
 	}
 	
 	@Command
