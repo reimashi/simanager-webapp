@@ -9,8 +9,8 @@
 			Latitud: <textbox value="@load(vm.currentLocation.latitude) @save(vm.currentLocation.latitude, before='save')" />
 		<hbox>
 				
-				<button label="save" onClick="@command('save')"/>
-				<button label="cancel" onClick="@command('cancel')"/>
+				<button label="Guardar" onClick="@command('save')"/>
+				<button label="Cancelar" onClick="@command('cancel')"/>
 			</hbox>
 		</window>
 		

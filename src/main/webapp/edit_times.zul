@@ -17,8 +17,8 @@
 			Segundo: <textbox value="@load(vm.currentTime.second) @save(vm.currentTime.second, before='save')" />
 		<hbox>
 				
-				<button label="save" onClick="@command('save')"/>
-				<button label="cancel" onClick="@command('cancel')"/>
+				<button label="Guardar" onClick="@command('save')"/>
+				<button label="Cancelar" onClick="@command('cancel')"/>
 			</hbox>
 		</window>
 

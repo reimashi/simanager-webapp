@@ -1,0 +1,68 @@
+<zk>
+	<include src="menu.zul"/>
+	<window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.AlertsVM')">
+
+		<window title="Alerts Editor" border="normal" mode="modal" visible="@load(vm.currentAlert ne null)">
+
+			Temp-high: <textbox value="@load(vm.currentAlert.temperatureHigh) @save(vm.currentAlert.temperatureHigh, before='save')" />
+			Temp-half: <textbox value="@load(vm.currentAlert.temperatureHalf) @save(vm.currentAlert.temperatureHalf, before='save')" />
+			Temp-low: <textbox value="@load(vm.currentAlert.temperatureLow) @save(vm.currentAlert.temperatureLow, before='save')" />
+			Rain-high: <textbox value="@load(vm.currentAlert.rainHigh) @save(vm.currentAlert.rainHigh, before='save')" />
+			Rain-half: <textbox value="@load(vm.currentAlert.rainHalf) @save(vm.currentAlert.rainHalf, before='save')" />
+			Rain-low: <textbox value="@load(vm.currentAlert.rainLow) @save(vm.currentAlert.rainLow, before='save')" />
+
+			<hbox>
+
+				<button label="Guardar" onClick="@command('save')"/>
+				<button label="Cancelar" onClick="@command('cancel')"/>
+			</hbox>
+		</window>
+
+		<groupbox closable="false">
+
+            <caption label="Administrar alertas">
+            </caption>
+            <button label="Nueva alerta" onClick="@command('newAlert')"/>
+
+        </groupbox>
+
+
+		<groupbox closable="false">
+<caption label="Lista de alertas">
+            </caption>
+
+			<listbox model="@load(vm.alerts)">
+                <listhead>
+                    <listheader label="ID"/>
+                    <listheader label="Temp-high"/>
+                    <listheader label="Temp-half"/>
+                    <listheader label="Temp-low"/>
+                    <listheader label="Rain-high"/>
+                    <listheader label="Rain-half"/>
+                    <listheader label="Rain-low"/>
+                    <listheader label="actions"/>
+
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell><label value="@load(each.id)"></label></listcell>
+                        <listcell><label value="@load(each.temperatureHigh)"></label></listcell>
+                        <listcell><label value="@load(each.temperatureHalf)"></label></listcell>
+                        <listcell><label value="@load(each.temperatureLow)"></label></listcell>
+                        <listcell><label value="@load(each.rainHigh)"></label></listcell>
+                        <listcell><label value="@load(each.rainHalf)"></label></listcell>
+                        <listcell><label value="@load(each.rainLow)"></label></listcell>
+                        <listcell>
+                            <button label="Borrar" onClick="@command('delete', a=each)"/>
+                            <button label="Editar" onClick="@command('edit', a=each)"/>
+                        </listcell>
+                    </listitem>
+                </template>
+
+            </listbox>
+
+
+
+		</groupbox>
+	</window>
+</zk>

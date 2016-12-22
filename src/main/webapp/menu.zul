@@ -20,9 +20,9 @@
 				</menuitem>
 				<menuitem label="Editar localizaciones" href="edit_locations.zul">
 				</menuitem>
-				<menuitem label="Editar alertas" href="edit_alerts.zul">
+				<menuitem label="Editar alertas" href="edit_alert.zul">
 				</menuitem>
-				<menuitem label="Editar medidas" href="edit_measurements.zul">
+				<menuitem label="Editar medidas" href="edit_measurement.zul">
 				</menuitem>
 			</menupopup>
 		</menu>
