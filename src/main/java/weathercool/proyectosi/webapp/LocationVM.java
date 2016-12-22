@@ -10,7 +10,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 
 import weathercool.proyectosi.Location;
 import weathercool.proyectosi.TransactionUtils;
-import weathercool.proyectosi.webapp.util.DesktopEntityManagerManager;
+import weathercool.proyectosi.webapp.utils.DesktopEntityManager;
 
 public class LocationVM {
 
@@ -21,14 +21,14 @@ public class LocationVM {
 	}
 	
 	public List<Location> getLocations() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		return em.createQuery("SELECT l FROM location l", Location.class).getResultList();
 	}
 	
 	@Command
 	@NotifyChange("location")
 	public void delete(@BindingParam("l") Location location) {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.remove(location);
 		});
@@ -43,7 +43,7 @@ public class LocationVM {
 	@Command
 	@NotifyChange({"locations", "currentLocation"})
 	public void save() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.persist(this.currentLocation);
 		});

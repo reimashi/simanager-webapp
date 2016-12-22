@@ -10,7 +10,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 
 import weathercool.proyectosi.Time;
 import weathercool.proyectosi.TransactionUtils;
-import weathercool.proyectosi.webapp.util.DesktopEntityManagerManager;
+import weathercool.proyectosi.webapp.utils.DesktopEntityManager;
 
 public class TimeVM {
 
@@ -21,14 +21,14 @@ public class TimeVM {
 	}
 	
 	public List<Time> getTimes() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		return em.createQuery("SELECT t FROM time t", Time.class).getResultList();
 	}
 	
 	@Command
 	@NotifyChange("time")
 	public void delete(@BindingParam("t") Time time) {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.remove(time);
 		});
@@ -43,7 +43,7 @@ public class TimeVM {
 	@Command
 	@NotifyChange({"times", "currentTime"})
 	public void save() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.persist(this.currentTime);
 		});
