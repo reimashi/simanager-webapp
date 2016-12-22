@@ -1,10 +1,10 @@
 <zk>
-	<menubar>
+	<menubar viewModel="@id('vm') @init('weathercool.proyectosi.webapp.MenuVM')">
 		<menu label="Usuario">
 			<menupopup>
 				<menuitem label="Editar usuarios" href="edit_users.zul">
 				</menuitem>
-				<menuitem label="Cerrar sesión" href="edit_departments.zul">
+				<menuitem label="Cerrar sesión" onClick="@command('doLogout')">
 				</menuitem>
 			</menupopup>
 		</menu>

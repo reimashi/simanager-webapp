@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.DesktopCleanup;
+import weathercool.proyectosi.User;
 
 public class DesktopEntityManager {
 
@@ -30,6 +31,16 @@ public class DesktopEntityManager {
                         newEm.close();
                     }
                 });
+
+                // Se crea un usuario administrador para el login por defecto
+                try {
+                    User admin = new User("admin");
+                    admin.setPassword("admin");
+                    admin.setName("Administrador");
+                    newEm.persist(admin);
+                }
+                catch(Exception e) {}
+
                 return newEm;
             }
 

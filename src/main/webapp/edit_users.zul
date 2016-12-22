@@ -1,26 +1,57 @@
+<?init class="weathercool.proyectosi.webapp.AuthenticationInit"?>
 <zk>
     <include src="menu.zul"/>
 
     <window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.UsersVM')">
         <window title="Editor de usuario" border="normal" mode="modal" visible="@load(vm.editUser ne null)">
-            Nombre:
-            <textbox value="@load(vm.editUser.name) @save(vm.editUser.name, before='saveEditUser')"/>
-            Contraseña:
-            <textbox value="@save(vm.editUser.password, before='saveEditUser')" type="password"/>
-
+            <vbox hflex="min" align="center">
+                <grid hflex="min">
+                    <columns>
+                        <column hflex="min" align="right"/>
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            Nombre:
+                            <textbox value="@load(vm.editUser.name) @save(vm.editUser.name, before='saveEditUser')"/>
+                        </row>
+                        <row>
+                            Contraseña:
+                            <textbox value="@save(vm.editUser.password, before='saveEditUser')" type="password"/>
+                        </row>
+                    </rows>
+                </grid>
+            </vbox>
             <hbox>
                 <button label="Guardar" onClick="@command('saveEditUser')"/>
                 <button label="Cancelar" onClick="@command('cancelEditUser')"/>
             </hbox>
         </window>
         <window title="Nuevo usuario" border="normal" mode="modal" visible="@load(vm.newUser ne null)">
-            Usuario:
-            <textbox value="@load(vm.newUser.username) @save(vm.newUser.username, before='saveNewUser')"/>
-            Nombre:
-            <textbox value="@load(vm.newUser.name) @save(vm.newUser.name, before='saveNewUser')"/>
-            Contraseña:
-            <textbox value="@load(vm.newUser.password) @save(vm.newUser.password, before='saveNewUser')" type="password"/>
-
+            <vbox hflex="min" align="center">
+                <grid hflex="min">
+                    <columns>
+                        <column hflex="min" align="right"/>
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            Usuario:
+                            <textbox
+                                    value="@load(vm.newUser.username) @save(vm.newUser.username, before='saveNewUser')"/>
+                        </row>
+                        <row>
+                            Nombre:
+                            <textbox value="@load(vm.newUser.name) @save(vm.newUser.name, before='saveNewUser')"/>
+                        </row>
+                        <row>
+                            Contraseña:
+                            <textbox value="@load(vm.newUser.password) @save(vm.newUser.password, before='saveNewUser')"
+                                     type="password"/>
+                        </row>
+                    </rows>
+                </grid>
+            </vbox>
             <hbox>
                 <button label="Crear" onClick="@command('saveNewUser')"/>
                 <button label="Cancelar" onClick="@command('cancelNewUser')"/>
