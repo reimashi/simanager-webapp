@@ -1,0 +1,42 @@
+<zk>
+	<include src="menu.zul"/>
+
+	<window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.LogRecordsVM')">
+		<groupbox closable="false">
+
+			<caption label="Log de cambios de la base de datos">
+			</caption>
+
+			<listbox model="@load(vm.logs)">
+				<listhead>
+					<listheader label="Instante"/>
+					<listheader label="Tabla"/>
+					<listheader label="Acción"/>
+					<listheader label="Usuario"/>
+					<listheader label="Acciones"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@load(each.time)"></label>
+						</listcell>
+						<listcell>
+							<label value="@load(each.tableName)"></label>
+						</listcell>
+						<listcell>
+							<label value="@load(each.action)"></label>
+						</listcell>
+						<listcell>
+							<label value="@load(each.user.username)"></label>
+						</listcell>
+						<listcell>
+							<button label="Borrar" onClick="@command('delete', u=each)"/>
+						</listcell>
+					</listitem>
+				</template>
+
+			</listbox>
+
+		</groupbox>
+	</window>
+</zk>

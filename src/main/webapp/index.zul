@@ -1,4 +1,6 @@
 <zk>
-	<window title="Hello World" border="normal">
-	</window>
+	<include src="menu.zul"/>
+	<auxhead>
+		<auxheader colspan="2" label="Bienvenido al almacén de datos de Weather Cool" style="font-size:16px" image="./images/icon.png"/>
+	</auxhead>
 </zk>

@@ -1,23 +1,28 @@
 <zk>
 	<menubar>
-		<menu label="Departments">
+		<menu label="Usuario">
 			<menupopup>
-				<menuitem label="Edit Departments..." 
-				href="edit_departments.zul">
+				<menuitem label="Editar usuarios" href="edit_users.zul">
+				</menuitem>
+				<menuitem label="Cerrar sesión" href="edit_departments.zul">
 				</menuitem>
 			</menupopup>
 		</menu>
-		<menu label="Employees">
+		<menu label="Logs">
 			<menupopup>
-				<menuitem label="Edit Employees..." 
-				href="edit_employees.zul">
+				<menuitem label="Editar logs" href="edit_logs.zul">
 				</menuitem>
 			</menupopup>
 		</menu>
-		<menu label="Projects">
+		<menu label="Almacén de datos">
 			<menupopup>
-				<menuitem label="Edit Projects..." 
-				href="edit_projects.zul">
+				<menuitem label="Editar tiempos" href="edit_times.zul">
+				</menuitem>
+				<menuitem label="Editar localizaciones" href="edit_locations.zul">
+				</menuitem>
+				<menuitem label="Editar alertas" href="edit_alerts.zul">
+				</menuitem>
+				<menuitem label="Editar medidas" href="edit_measurements.zul">
 				</menuitem>
 			</menupopup>
 		</menu>

@@ -1,66 +1,87 @@
 package weathercool.proyectosi.webapp;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+
+import weathercool.proyectosi.TransactionUtils;
+import weathercool.proyectosi.User;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import weathercool.proyectosi.webapp.utils.DesktopEntityManager;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public class UsersVM {
-    private int mierda;
-/*
-	// department under edition...
-	private Department currentDepartment = null;
-	
-	public Department getCurrentDepartment() {
-		return currentDepartment;
-	}
-	
-	public List<Department> getDepartments() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		return em.createQuery("SELECT d FROM Department d", Department.class).getResultList();
-	}
-	
-	@Command
-	@NotifyChange("departments")
-	public void delete(@BindingParam("d") Department department) {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		TransactionUtils.doTransaction(em, __ -> {
-			Set<Employee> employeesCopy = new HashSet<>(department.getEmployees());
-			
-			for (Employee myEmployee: employeesCopy) {
-				myEmployee.setDepartment(null);
-			}
-			
-			em.remove(department);
-		});
-	}
-	
-	@Command
-	@NotifyChange("currentDepartment")
-	public void newDepartment() {
-		this.currentDepartment = new Department();
-	}
-	
-	@Command
-	@NotifyChange({"departments", "currentDepartment"})
-	public void save() {
-		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		TransactionUtils.doTransaction(em, __ -> {
-			em.persist(this.currentDepartment);
-		});
-		this.currentDepartment = null;
-	}
-	
-	@Command
-	@NotifyChange("currentDepartment")
-	public void cancel() {
-		this.currentDepartment = null;
-	}
-	
-	@Command
-	@NotifyChange("currentDepartment")
-	public void edit(@BindingParam("d") Department department) {
-		this.currentDepartment = department;
-	}*/
+    public List<User> getUsers() {
+        EntityManager em = DesktopEntityManager.getDesktopEntityManager();
+        List<User> users = em.createQuery("SELECT u FROM User u ORDER BY u.username", User.class).getResultList();
+        return users;
+    }
+
+    @Command
+    @NotifyChange("users")
+    public void delete(@BindingParam("u") User user) {
+        EntityManager em = DesktopEntityManager.getDesktopEntityManager();
+        TransactionUtils.doTransaction(em, __ -> {
+            em.remove(user);
+        });
+    }
+
+    private User editUser = null;
+    public User getEditUser() { return this.editUser; }
+    private User newUser = null;
+    public User getNewUser() { return this.newUser; }
+
+    @Command
+    @NotifyChange("newUser")
+    public void newUser() {
+        this.newUser = new User();
+    }
+
+    @Command
+    @NotifyChange("editUser")
+    public void editUser(@BindingParam("u") User user) {
+        this.editUser = user;
+    }
+
+    @Command
+    @NotifyChange("newUser")
+    public void cancelNewUser() {
+        this.newUser = null;
+    }
+
+    @Command
+    @NotifyChange("editUser")
+    public void cancelEditUser() {
+        this.editUser = null;
+    }
+
+    @Command
+    @NotifyChange({"users", "newUser"})
+    public void saveNewUser() {
+        if (this.newUser != null) {
+            EntityManager em = DesktopEntityManager.getDesktopEntityManager();
+            TransactionUtils.doTransaction(em, __ -> {
+                em.persist(this.newUser);
+            });
+            this.newUser = null;
+        }
+    }
+
+    @Command
+    @NotifyChange({"users", "editUser"})
+    public void saveEditUser() {
+        if (this.editUser != null) {
+            EntityManager em = DesktopEntityManager.getDesktopEntityManager();
+            TransactionUtils.doTransaction(em, __ -> {
+                em.persist(this.editUser);
+            });
+            this.editUser = null;
+        }
+    }
 }

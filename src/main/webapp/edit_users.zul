@@ -1,0 +1,70 @@
+<zk>
+    <include src="menu.zul"/>
+
+    <window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.UsersVM')">
+        <window title="Editor de usuario" border="normal" mode="modal" visible="@load(vm.editUser ne null)">
+            Nombre:
+            <textbox value="@load(vm.editUser.name) @save(vm.editUser.name, before='saveEditUser')"/>
+            Contraseña:
+            <textbox value="@save(vm.editUser.password, before='saveEditUser')" type="password"/>
+
+            <hbox>
+                <button label="Guardar" onClick="@command('saveEditUser')"/>
+                <button label="Cancelar" onClick="@command('cancelEditUser')"/>
+            </hbox>
+        </window>
+        <window title="Nuevo usuario" border="normal" mode="modal" visible="@load(vm.newUser ne null)">
+            Usuario:
+            <textbox value="@load(vm.newUser.username) @save(vm.newUser.username, before='saveNewUser')"/>
+            Nombre:
+            <textbox value="@load(vm.newUser.name) @save(vm.newUser.name, before='saveNewUser')"/>
+            Contraseña:
+            <textbox value="@load(vm.newUser.password) @save(vm.newUser.password, before='saveNewUser')" type="password"/>
+
+            <hbox>
+                <button label="Crear" onClick="@command('saveNewUser')"/>
+                <button label="Cancelar" onClick="@command('cancelNewUser')"/>
+            </hbox>
+        </window>
+
+        <groupbox closable="false">
+
+            <caption label="Administrar usuarios">
+            </caption>
+
+            <button label="Nuevo usuario" onClick="@command('newUser')"/>
+
+        </groupbox>
+
+        <groupbox closable="false">
+
+            <caption label="Lista de usuarios">
+            </caption>
+
+            <listbox model="@load(vm.users)">
+                <listhead>
+                    <listheader label="Usuario"/>
+                    <listheader label="Nombre"/>
+                    <listheader label="Acciones"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell>
+                            <label value="@load(each.username)"></label>
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.name)"></label>
+                        </listcell>
+                        <listcell>
+                            <button label="Borrar" onClick="@command('delete', u=each)"
+                                    visible="@load(each.username ne 'admin')"/>
+                            <button label="Editar" onClick="@command('editUser', u=each)"/>
+                        </listcell>
+                    </listitem>
+                </template>
+
+            </listbox>
+
+        </groupbox>
+    </window>
+</zk>
