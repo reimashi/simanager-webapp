@@ -1,0 +1,74 @@
+<zk>
+	<include src="menu.zul"/>
+	<window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.MeasurementVM')">
+
+		<window title="Measurement Editor" border="normal" mode="modal" visible="@load(vm.currentMeasurement ne null)">
+
+			Elevation: <textbox value="@load(vm.currentMeasurement.elevation) @save(vm.currentMeasurement.elevation, before='save')" />
+			Temp-surface: <textbox value="@load(vm.currentMeasurement.temperatureSurface) @save(vm.currentMeasurement.temperatureSurface, before='save')" />
+			Temp-500mb: <textbox value="@load(vm.currentMeasurement.temperature500mb) @save(vm.currentMeasurement.temperature500mb, before='save')" />
+			Temp-850mb: <textbox value="@load(vm.currentMeasurement.temperature850mb) @save(vm.currentMeasurement.temperature850mb, before='save')" />
+			Temp-sea-level: <textbox value="@load(vm.currentMeasurement.temperatureSeaLevel) @save(vm.currentMeasurement.temperatureSeaLevel, before='save')" />
+			Cloud-cover-high: <textbox value="@load(vm.currentMeasurement.cloudCoverHigh) @save(vm.currentMeasurement.cloudCoverHigh, before='save')" />
+			Cloud-cover-half: <textbox value="@load(vm.currentMeasurement.cloudCoverHalf) @save(vm.currentMeasurement.cloudCoverHalf, before='save')" />
+			Cloud-cover-low: <textbox value="@load(vm.currentMeasurement.cloudCoverLow) @save(vm.currentMeasurement.cloudCoverLow, before='save')" />
+			visibility: <textbox value="@load(vm.currentMeasurement.visibility) @save(vm.currentMeasurement.visibility, before='save')" />
+			salinity: <textbox value="@load(vm.currentMeasurement.salinity) @save(vm.currentMeasurement.salinity, before='save')" />
+			water-speed-eastward: <textbox value="@load(vm.currentMeasurement.waterSpeedEastward) @save(vm.currentMeasurement.waterSpeedEastward, before='save')" />
+			water-speed-northward: <textbox value="@load(vm.currentMeasurement.waterSpeedNorthward) @save(vm.currentMeasurement.waterSpeedNorthward, before='save')" />
+			wave-dir-mean: <textbox value="@load(vm.currentMeasurement.waterDirectionMean) @save(vm.currentMeasurement.waterDirectionMean, before='save')" />
+			wave-dir-peak: <textbox value="@load(vm.currentMeasurement.waterDirectionPeak) @save(vm.currentMeasurement.waterDirectionPeak, before='save')" />
+			wave-period-abs: <textbox value="@load(vm.currentMeasurement.waterPeriodAbsolute) @save(vm.currentMeasurement.waterPeriodAbsolute, before='save')" />
+			wave-period-peak: <textbox value="@load(vm.currentMeasurement.waterPeriodPeak) @save(vm.currentMeasurement.waterPeriodPeak, before='save')" />
+			snow-level: <textbox value="@load(vm.currentMeasurement.snowLevel) @save(vm.currentMeasurement.snowLevel, before='save')" />
+			snow-prec: <textbox value="@load(vm.currentMeasurement.snowPrecipitation) @save(vm.currentMeasurement.snowPrecipitation, before='save')" />
+			rain-pec: <textbox value="@load(vm.currentMeasurement.rainPrecipitation) @save(vm.currentMeasurement.rainPrecipitation, before='save')" />
+			humidity: <textbox value="@load(vm.currentMeasurement.humidity) @save(vm.currentMeasurement.humidity, before='save')" />
+			wind-dir: <textbox value="@load(vm.currentMeasurement.windDirection) @save(vm.currentMeasurement.windDirection, before='save')" />
+			wind-lon: <textbox value="@load(vm.currentMeasurement.windLon) @save(vm.currentMeasurement.windLon, before='save')" />
+			wind-lat: <textbox value="@load(vm.currentMeasurement.windLat) @save(vm.currentMeasurement.windLat, before='save')" />
+			wind-gust: <textbox value="@load(vm.currentMeasurement.windGust) @save(vm.currentMeasurement.windGust, before='save')" />
+
+
+
+			<hbox>
+
+				<button label="Guardar" onClick="@command('save')"/>
+				<button label="Cancelar" onClick="@command('cancel')"/>
+			</hbox>
+
+		</window>
+
+
+		<groupbox closable="false">
+            <caption label="Administrar medidas">
+                </caption>
+                <button label="Nueva medida" onClick="@command('newMeasurement')"/>
+
+        </groupbox>
+
+        <groupbox closable="false">
+        <caption label="Lista de medidas">
+                    </caption>
+
+			<listbox model="@load(vm.measurements)">
+				<listhead>
+					<listheader label="name"/>
+					<listheader label="actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.id)"></label></listcell>
+						<listcell>
+							<button label="delete" onClick="@command('delete', m=each)"/>
+							<button label="edit" onClick="@command('edit', m=each)"/>
+
+						</listcell>
+					</listitem>
+				</template>
+
+			</listbox>
+
+		</groupbox>
+	</window>
+</zk>
