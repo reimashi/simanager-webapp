@@ -1,4 +1,3 @@
-<?init class="weathercool.proyectosi.webapp.AuthenticationInit"?>
 <zk>
 	<include src="menu.zul"/>
 

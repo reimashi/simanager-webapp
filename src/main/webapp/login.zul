@@ -5,7 +5,6 @@
           pack="center" spacing="20px">
         <vlayout>
             <window id="loginWin"
-                    apply="weathercool.proyectosi.webapp.AuthenticationVM"
                     title="Iniciar sesión" border="normal" hflex="min">
                 <vbox hflex="min" align="center">
                     <grid hflex="min">
@@ -27,6 +26,7 @@
                     </grid>
                     <label id="message" sclass="warn" value="&#160;" />
                     <button id="login" label="Iniciar sesión" />
+
                 </vbox>
             </window>
         </vlayout>
