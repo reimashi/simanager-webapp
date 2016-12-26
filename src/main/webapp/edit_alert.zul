@@ -1,3 +1,4 @@
+<?init class="weathercool.proyectosi.webapp.AuthenticationInit"?>
 <zk>
 	<include src="menu.zul"/>
 	<window viewModel="@id('vm') @init('weathercool.proyectosi.webapp.AlertsVM')">
