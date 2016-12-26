@@ -33,7 +33,7 @@
             <combobox model="@load(vm.time)"
                       selectedItem="@load(vm.currentMeasurement.time) @save(vm.currentMeasurement.time, before='save')">
                 <template name="model">
-                    <comboitem label="@load(each.hour):@load(each.minute):@load(each.second) @load(each.day)/@load(each.month)/@load(each.year)"/>
+                    <comboitem label="@load(each.toString)"/>
                 </template>
             </combobox>
 
@@ -41,7 +41,7 @@
             <combobox model="@load(vm.alert)"
                       selectedItem="@load(vm.currentMeasurement.alert) @save(vm.currentMeasurement.alert, before='save')">
                 <template name="model">
-                    <comboitem label="@load(each.id)"/>
+                    <comboitem label="@load(each.toString)"/>
                 </template>
             </combobox>
 
@@ -49,9 +49,7 @@
             <combobox model="@load(vm.location)"
                       selectedItem="@load(vm.currentMeasurement.location) @save(vm.currentMeasurement.location, before='save')">
                 <template name="model">
-                    <comboitem>
-						<label value="@load(concat(each.longitude).concat(' - ').concat(each.latitude))"/>
-					</comboitem>
+						<comboitem label="@load(each.toString)"/>
                 </template>
             </combobox>
 
@@ -83,7 +81,7 @@
 				</listhead>
 				<template name="model">
 					<listitem>
-						<listcell><label value="@load(each.id)"></label></listcell>
+						<listcell><label value="@load(each.toString)"></label></listcell>
 						<listcell>
 							<button label="delete" onClick="@command('delete', m=each)"/>
 							<button label="edit" onClick="@command('edit', m=each)"/>
