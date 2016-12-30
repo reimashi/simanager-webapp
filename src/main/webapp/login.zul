@@ -16,12 +16,11 @@
                         <rows>
                             <row>
                                 Usuario :
-                                <textbox id="account" width="200px" />
+                                <textbox id="accountInput" constraint="no empty: Se debe especificar un usuario" width="200px" />
                             </row>
                             <row>
                                 Contraseña :
-                                <textbox id="password" type="password"
-                                         width="200px" />
+                                <textbox id="passwordInput" constraint="no empty: Se debe especificar una contraseña" type="password" width="200px" />
                             </row>
                         </rows>
                     </grid>

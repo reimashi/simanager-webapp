@@ -8,26 +8,28 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 
-import weathercool.proyectosi.Location;
+import weathercool.proyectosi.LocationClass;
 import weathercool.proyectosi.TransactionUtils;
 import weathercool.proyectosi.webapp.utils.DesktopEntityManager;
 
 public class LocationVM {
 
-	private Location currentLocation = null;
+	private LocationClass currentLocation = null;
 	
-	public Location getCurrentLocation() {
+	public LocationClass getCurrentLocation() {
 		return currentLocation;
 	}
 	
-	public List<Location> getLocations() {
+	public List<LocationClass> getLocations() {
 		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
-		return em.createQuery("SELECT l FROM Location l", Location.class).getResultList();
+		return em.createQuery("SELECT l FROM LocationClass l", LocationClass.class).getResultList();
 	}
 	
 	@Command
 	@NotifyChange("location")
-	public void delete(@BindingParam("l") Location location) {
+	public void delete(@BindingParam("l") LocationClass location) {
+		LogService.getInstance().logDelete("location", String.valueOf(location.getId()));
+
 		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.remove(location);
@@ -37,7 +39,9 @@ public class LocationVM {
 	@Command
 	@NotifyChange("currentLocation")
 	public void newLocation() {
-		this.currentLocation = new Location();
+		this.currentLocation = new LocationClass();
+
+		LogService.getInstance().logCreate("location");
 	}
 	
 	@Command
@@ -47,6 +51,8 @@ public class LocationVM {
 		TransactionUtils.doTransaction(em, __ -> {
 			em.persist(this.currentLocation);
 		});
+
+		LogService.getInstance().logEdit("location", String.valueOf(this.currentLocation.getId()));
 		this.currentLocation = null;
 	}
 	
@@ -58,7 +64,7 @@ public class LocationVM {
 	
 	@Command
 	@NotifyChange("currentLocation")
-	public void edit(@BindingParam("l") Location location) {
+	public void edit(@BindingParam("l") LocationClass location) {
 		this.currentLocation = location;
 	}
 }

@@ -30,6 +30,7 @@ public class AlertsVM {
     @NotifyChange("alert")
     public void delete(@BindingParam("a") Alert alert) {
         EntityManager em = DesktopEntityManager.getDesktopEntityManager();
+        LogService.getInstance().logDelete("alert", String.valueOf(alert.getId()));
         TransactionUtils.doTransaction(em, __ -> {
             em.remove(alert);
         });
@@ -39,6 +40,7 @@ public class AlertsVM {
     @NotifyChange("currentAlert")
     public void newAlert() {
         this.currentAlert = new Alert();
+        LogService.getInstance().logCreate("alert");
     }
 
     @Command
@@ -60,6 +62,7 @@ public class AlertsVM {
         TransactionUtils.doTransaction(em, __ -> {
             em.persist(this.currentAlert);
         });
+        LogService.getInstance().logEdit("alert", String.valueOf(this.currentAlert.getId()));
         this.currentAlert = null;
     }
 }

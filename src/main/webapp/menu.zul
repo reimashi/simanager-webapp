@@ -4,8 +4,6 @@
 			<menupopup>
 				<menuitem label="Editar usuarios" href="edit_users.zul">
 				</menuitem>
-				<menuitem label="Cerrar sesión" onClick="@command('doLogout')">
-				</menuitem>
 			</menupopup>
 		</menu>
 		<menu label="Logs">
@@ -26,5 +24,7 @@
 				</menuitem>
 			</menupopup>
 		</menu>
+		<menuitem label="Cerrar sesión" onClick="@command('doLogout')" if="${vm.loguedin}">
+		</menuitem>
 	</menubar>
 </zk>

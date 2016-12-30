@@ -28,16 +28,22 @@ public class TimeVM {
 	@Command
 	@NotifyChange("time")
 	public void delete(@BindingParam("t") Time time) {
+		LogService.getInstance().logDelete("time", String.valueOf(time.getId()));
+
 		EntityManager em = DesktopEntityManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
 			em.remove(time);
 		});
+
+		LogService.getInstance().logDelete("time", String.valueOf(this.currentTime.getId()));
 	}
 	
 	@Command
 	@NotifyChange("currentTime")
 	public void newTime() {
 		this.currentTime = new Time();
+
+		LogService.getInstance().logCreate("time");
 	}
 	
 	@Command
@@ -47,6 +53,8 @@ public class TimeVM {
 		TransactionUtils.doTransaction(em, __ -> {
 			em.persist(this.currentTime);
 		});
+
+		LogService.getInstance().logEdit("time", String.valueOf(this.currentTime.getId()));
 		this.currentTime = null;
 	}
 	

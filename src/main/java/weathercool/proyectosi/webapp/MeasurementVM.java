@@ -9,7 +9,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 
 import weathercool.proyectosi.Alert;
-import weathercool.proyectosi.Location;
+import weathercool.proyectosi.LocationClass;
 import weathercool.proyectosi.Measurement;
 import weathercool.proyectosi.Time;
 import weathercool.proyectosi.TransactionUtils;
@@ -36,15 +36,17 @@ public class MeasurementVM {
         return em.createQuery("SELECT d FROM Time d", Time.class).getResultList();
     }
 
-    public List<Location> getLocation() {
+    public List<LocationClass> getLocation() {
         EntityManager em = DesktopEntityManager.getDesktopEntityManager();
-        return em.createQuery("SELECT d FROM Location d", Location.class).getResultList();
+        return em.createQuery("SELECT d FROM LocationClass d", LocationClass.class).getResultList();
     }
 
     @Command
     @NotifyChange("currentMeasurement")
     public void newMeasurement() {
         this.currentMeasurement = new Measurement();
+
+        LogService.getInstance().logCreate("measurement");
     }
 
     @Command
@@ -66,6 +68,8 @@ public class MeasurementVM {
         TransactionUtils.doTransaction(em, __ -> {
             em.remove(measurement);
         });
+
+        LogService.getInstance().logDelete("measurement");
     }
 
     @Command
@@ -75,6 +79,8 @@ public class MeasurementVM {
         TransactionUtils.doTransaction(em, __ -> {
             em.persist(this.currentMeasurement);
         });
+
+        LogService.getInstance().logEdit("measurement");
         this.currentMeasurement = null;
     }
 

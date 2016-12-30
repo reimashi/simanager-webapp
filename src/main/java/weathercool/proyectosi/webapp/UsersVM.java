@@ -26,6 +26,8 @@ public class UsersVM {
     @Command
     @NotifyChange("users")
     public void delete(@BindingParam("u") User user) {
+        LogService.getInstance().logDelete("user", user.getUsername());
+
         EntityManager em = DesktopEntityManager.getDesktopEntityManager();
         TransactionUtils.doTransaction(em, __ -> {
             em.remove(user);
@@ -69,6 +71,8 @@ public class UsersVM {
             TransactionUtils.doTransaction(em, __ -> {
                 em.persist(this.newUser);
             });
+
+            LogService.getInstance().logCreate("user");
             this.newUser = null;
         }
     }
@@ -81,6 +85,8 @@ public class UsersVM {
             TransactionUtils.doTransaction(em, __ -> {
                 em.persist(this.editUser);
             });
+
+            LogService.getInstance().logEdit("user", this.editUser.getUsername());
             this.editUser = null;
         }
     }

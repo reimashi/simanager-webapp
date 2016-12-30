@@ -13,8 +13,6 @@ public class DesktopEntityManager {
 
     private static final String ENTITY_MANAGER_NAME = "__ENTITY_MANAGER__";
     private static EntityManagerFactory emf = null;
-	
-	private static boolean createUserAdmin = true;
 
     public static EntityManager getDesktopEntityManager() {
         Desktop currentDesktop = Executions.getCurrent().getDesktop();
@@ -34,17 +32,7 @@ public class DesktopEntityManager {
                     }
                 });
 
-                // Se crea un usuario administrador para el login por defecto
-				if (createUserAdmin) {
-					try {
-						User admin = new User("admin");
-						admin.setPassword("admin");
-						admin.setName("Administrador");
-						newEm.persist(admin);
-					}
-					catch(Exception e) {}
-					createUserAdmin = false;
-				}
+                CreateAdminUser(newEm);
 
                 return newEm;
             }
@@ -80,5 +68,24 @@ public class DesktopEntityManager {
         });
 
         return emf;
+    }
+
+    private static void CreateAdminUser(EntityManager em) {
+        User admin = null;
+
+        try {
+            admin = em.find(User.class, "admin");
+        }
+        catch(Exception e) {}
+
+        if (admin == null) {
+            try {
+                admin = new User("admin");
+                admin.setPassword("admin");
+                admin.setName("Administrador");
+                em.persist(admin);
+            } catch (Exception e) {
+            }
+        }
     }
 }

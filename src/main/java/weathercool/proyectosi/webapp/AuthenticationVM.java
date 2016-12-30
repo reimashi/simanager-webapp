@@ -13,13 +13,16 @@ import org.zkoss.zul.Textbox;
 import weathercool.proyectosi.User;
 
 import javax.persistence.EntityManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AuthenticationVM extends SelectorComposer<Component> {
-    //wire components
+    private static Logger logger = Logger.getLogger(AuthenticationVM.class.getName());
+
     @Wire
-    Textbox account;
+    Textbox accountInput;
     @Wire
-    Textbox password;
+    Textbox passwordInput;
     @Wire
     Label message;
 
@@ -28,8 +31,10 @@ public class AuthenticationVM extends SelectorComposer<Component> {
 
     @Listen("onClick=#login; onOK=#loginWin")
     public void doLogin(){
-        String nm = account.getValue();
-        String pd = password.getValue();
+        String nm = accountInput.getValue();
+        String pd = passwordInput.getValue();
+
+        logger.log(Level.INFO, "Formulario de login - Usuario: " + nm + " - Contraseña: " + pd);
 
         if(!authService.login(nm,pd)){
             message.setValue("El usuario o la contraseña son incorrectos.");
